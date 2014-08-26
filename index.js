@@ -94,7 +94,7 @@ exports.connect = function(user, pass, callback) {
 			}
 		}
 	});
-	socket.on('balance', function(data){
+	socket.on('balance', function(data) {
 		if (typeof data.balance !== 'undefined') {
 			botBalance = data.balance;
 			log("info", "Bot balance is " + botBalance + " doge");
@@ -102,6 +102,9 @@ exports.connect = function(user, pass, callback) {
 			botBalance += data.change;
 			log("dbug", "Bot balance is " + botBalance + " doge (" + (data.change > 0 ? "+" : "") + data.change + ")");
 		}
+	});
+	socket.on('msg', function(data) {
+		log("info", "MEssage received from ShibeChat: " + data.message);
 	});
 }
 
@@ -171,6 +174,10 @@ exports.setLogLevel = function(level) {
 
 exports.logger = function(fn) {
 	customLogger = fn;
+}
+
+exports.getSocket = function() {
+	return socket;
 }
 
 function log(prefix, msg) {

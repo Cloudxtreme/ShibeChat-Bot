@@ -1,25 +1,23 @@
-DogeChat-Bot Module
+ShibeChat-Bot Module
 ===================
-This module can be used to make a chat bot for the website [DogeChat](http://dogechat.net/) using Node.JS and it simplifies the process a great deal. Please note the following when making a bot for DogeChat:
+This module can be used to make a chat bot for the website [ShibeChat](http://shibechat.com/) using Node.JS and it simplifies the process a great deal. Please note the following when making a bot for ShibeChat:
 
   * A bot account must have a username ending in bot.
   * Bot accounts must be registered as bots - contact a moderator on DogeChat to arrange this.
   * A bot must not make more than 2 sequential unprompted messages.
 
-For more information about DogeChat and the rules, please visit the [Info Page](http://info.dogechat.org/).
-
 Installation
 ------------
 
-To install the module and its dependencies, create a folder to make you bot in and open your command line there. Then type `npm install dogechat-bot` to install the module.
+To install the module and its dependencies, create a folder to make you bot in and open your command line there. Then type `npm install shibechat-bot` to install the module.
 
 Getting Started
 ---------------
 
-You will first need to sign up for a new account, following the rules above, on DogeChat. Next you should create a room to host your bot in, this is usually the same as your bots name.
+You will first need to sign up for a new account, following the rules above, on ShibeChat. Next you should create a room to host your bot in, this is usually the same as your bots name.
 To start the script make a javascript file containing the following code and run this file to start your bot. Below is an example of a simple bot.
 
-    var bot = require('dogechat-bot');
+    var bot = require('shibechat-bot');
     bot.connect(BOT_USERNAME, BOT_PASSWORD, function() {
 		bot.joinRoom("awesomebot");
 		bot.chat("Bot is online!", "awesomebot");
@@ -33,7 +31,7 @@ API
 ---
 
 ### bot.connect(username:String, password:String, fn:Function)
-Connects to DogeChat and logs in using the supplied credentials. Will callback on `fn` once successfully logged in.
+Connects to ShibeChat and logs in using the supplied credentials. Will callback on `fn` once successfully logged in.
 
     bot.connect("awesomebot", "mypassword", function() {
 	    // Successfully logged in!
@@ -50,14 +48,13 @@ This adds a command to the command registry so that when a user types `command` 
 
   * `user` - The user who sent the message
   * `message` - A neatly formatted version of the message received with the command omitted
-  * `messageArray` - An array containing the message split up by spaces to make handling parameters easier with the command omitted
+  * `msgArray` - An array containing the message split up by spaces to make handling parameters easier, with the command omitted
   * `command` - The command that has been executed, for example `!help`
   * `room` - The room in which the message was posted
   * `timestamp` - An ISO-8601 formatted datetime string of when the message was sent
 
 ### bot.chat(message:String, room:String)
 This will send a chat message in the room `room` saying `message`.
-Note: Saying a message in a room does not require you to be in it. Just becuase you can send a message to a room does not mean your bot will receive other messages in that room.
 
     bot.chat("Hello, world!", "awesomebot");
 
@@ -65,7 +62,7 @@ Note: Saying a message in a room does not require you to be in it. Just becuase 
 This will send a private message to `user` saying `message`.
 Note: This will send the message in the PM but your bot will not receive any replies that are sent to it unless you manually join the PM room.
 
-    bot.chat("cainy", "Hey there!");
+    bot.PM("cainy", "Hey there!");
 
 ### bot.tip(user:String, amount:Integer, room:String[, message:String])
 This will tip `user` the specified `amount` of dogecoins in the room `room` with the optional message: `message`.
@@ -83,7 +80,7 @@ This specifies a function to be called when the bot receives a chat message that
 
   * `user` - The user who sent the message
   * `message` - A neatly formatted version of the message received
-  * `messageArray` - An array containing the message split up by spaces to make handling parameters easier
+  * `msgArray` - An array containing the message split up by spaces to make handling parameters easier
   * `room` - The room in which the message was posted
   * `timestamp` - An ISO-8601 formatted datetime string of when the message was sent
 
@@ -117,16 +114,6 @@ This returns the bots balance. This is unfortunately often inaccurate because Do
 
     var myBalance = bot.getBalance();
 
-### bot.setColor(color:String)
-This will set the color your bot messages with. Obviously you must have bought this color on the bots account otherwise the color will default to black.
-
-    bot.setColor("a22");
-
-### bot.setBadge(badge:String)
-This will set the badge your bot messages with. Obviously you must have bought this badge on the bots account otherwise the badge will default to none.
-
-    bot.setBadge("cake");
-
 ### bot.setLogLevel(logLevel:Integer)
 This sets how detailed the logging will be made by the module. This will default to `1` if not set.
 
@@ -146,6 +133,9 @@ The example code below adds each log to a variable which could be later written 
   * `level` contains a string denoting what level of logging this is, it can be any of `DBUG`, `INFO`, `WARN` or `CHAT`
   * `message` contains the message which was logged
   * `time` is a JavaScript date object which is the time at which this message was logged
+
+### bot.getSocket()
+This will return the `socket.io-client` socket connection with ShibeChat for you to manually manage any other socket events.
 
 License
 --------
