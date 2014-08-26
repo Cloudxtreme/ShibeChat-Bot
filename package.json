@@ -1,0 +1,26 @@
+{
+  "name": "shibechat-bot",
+  "version": "0.0.1",
+  "description": "This module can be used to make a chat bot for the website ShibeChat using Node.JS and it simplifies the process a great deal.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cainy393/shibechat-bot"
+  },
+  "keywords": [
+    "socket.io-client",
+    "chat",
+    "bot",
+    "dogecoin",
+    "shibechat"
+  ],
+  "dependencies": {
+	"socket.io-client": "0.9.16"
+  },
+  "author": "cainy",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cainy393/shibechat-bot/issues"
+  },
+  "homepage": "https://github.com/cainy393/shibechat-bot"
+}
